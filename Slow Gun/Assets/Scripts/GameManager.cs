@@ -8,14 +8,27 @@ public class GameManager : MonoBehaviour
     [Header("MainMenu")]
     [SerializeField]
     private GameObject mainMenuPanel;
+    [SerializeField]
+    private Text stageText;
+
+    [SerializeField]
+    private GameObject gameOverPanel;
+    [SerializeField]
+    private GameObject gameClearPanel;
 
     [SerializeField]
     private GameObject playerGun;
-
+    [SerializeField]
+    private StageController stageController;
     public bool IsGameStart { set; get; } = false;
     public bool IsGameOver { set; get; } = false;
 
     private static GameManager instance = null;
+
+    private int currentStage = 1;
+    public int stageEnemyNum;
+
+    public bool testStage = false;
 
     void Awake()
     {
@@ -36,6 +49,10 @@ public class GameManager : MonoBehaviour
             //그래서 이미 전역변수인 instance에 인스턴스가 존재한다면 자신(새로운 씬의 GameMgr)을 삭제해준다.
             Destroy(this.gameObject);
         }
+
+        if (testStage) PlayerPrefs.SetInt("BestStage", 0);
+
+        currentStage = PlayerPrefs.GetInt("BestStage");
     }
 
     //게임 매니저 인스턴스에 접근할 수 있는 프로퍼티. static이므로 다른 클래스에서 맘껏 호출할 수 있다.
@@ -51,7 +68,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator Start()
+    private void Start()
+    {
+        stageText.text = (currentStage + 1).ToString();
+
+        StartCoroutine(TapToStart());
+    }
+
+    IEnumerator TapToStart()
     {
         while (true)
         {
@@ -67,13 +91,39 @@ public class GameManager : MonoBehaviour
 
     private void GaemStart()
     {
+        stageEnemyNum = stageController.stageEnemynum[currentStage];
         IsGameStart = true;
         mainMenuPanel.SetActive(false);
+        playerGun.transform.position = new Vector3(-6, 0, 0);
         playerGun.SetActive(true);
+        stageController.Stage(currentStage);
     }
 
     public void GaemOver()
     {
+        gameOverPanel.SetActive(true);
         playerGun.SetActive(false);
+        IsGameOver = true;
+        IsGameStart = false;
+    }
+
+    public void GameClear()
+    {
+        gameClearPanel.SetActive(true);
+        IsGameStart = false;
+        currentStage++;
+        PlayerPrefs.SetInt("BestStage", currentStage);
+    }
+
+    public void HomeBtn()
+    {
+        IsGameOver = false;
+        playerGun.SetActive(false);
+        mainMenuPanel.SetActive(true);
+        currentStage = PlayerPrefs.GetInt("BestStage");
+        stageText.text = (currentStage + 1).ToString();
+        gameOverPanel.SetActive(false);
+        gameClearPanel.SetActive(false);
+        StartCoroutine(TapToStart());
     }
 }

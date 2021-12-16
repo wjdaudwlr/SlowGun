@@ -23,6 +23,7 @@ public class MeleeWeapon : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
+        if (GameManager.Instance.IsGameStart == false) return;
         attack();
     }
 

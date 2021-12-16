@@ -25,6 +25,8 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsGameStart == false) return;
+
         Vector2 direction = gunPointTransform.position - transform.position;
 
         if (Input.GetKeyDown(KeyCode.Space))
