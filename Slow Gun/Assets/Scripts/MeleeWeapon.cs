@@ -5,14 +5,14 @@ using UnityEngine;
 public class MeleeWeapon : MonoBehaviour
 {
     [SerializeField]
-    private Transform attackPoint;
+    protected Transform attackPoint;
     [SerializeField]
-    private float moveSpeed;
+    protected float moveSpeed;
 
-    private Rigidbody2D rigid;
-    private TrailRenderer attackTrail;
+    protected Rigidbody2D rigid;
+    protected TrailRenderer attackTrail;
 
-    bool isAttack = true;
+    protected bool isAttack = true;
 
     private void Awake()
     {
@@ -21,7 +21,12 @@ public class MeleeWeapon : MonoBehaviour
         attackTrail = GetComponentInChildren<TrailRenderer>();
     }
 
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
+    {
+        attack();
+    }
+
+    public virtual void attack()
     {
         Vector2 dir = attackPoint.position - transform.position;
 
@@ -36,7 +41,6 @@ public class MeleeWeapon : MonoBehaviour
 
         attackTrail.enabled = isAttack ? false : true;
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
