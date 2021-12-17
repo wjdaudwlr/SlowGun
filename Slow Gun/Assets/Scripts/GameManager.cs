@@ -89,12 +89,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+  
+
     private void GaemStart()
     {
+        StopCoroutine(TapToStart());
         stageEnemyNum = stageController.stageEnemynum[currentStage];
         IsPlayingGame = true;
         mainMenuPanel.SetActive(false);
-        playerGun.transform.position = new Vector3(-6, 0, 0);
+        playerGun.transform.position = new Vector3(-6, Random.Range(-2f, 3f), 0);
+        playerGun.transform.rotation = Quaternion.Euler(0, 0, 30);
         playerGun.SetActive(true);
         stageController.Stage(currentStage);
     }

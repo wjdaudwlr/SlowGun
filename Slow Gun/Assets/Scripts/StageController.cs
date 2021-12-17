@@ -31,6 +31,14 @@ public class StageController : MonoBehaviour
                 Instantiate(enemies[1], new Vector2(6, 2), Quaternion.identity);
                 Instantiate(enemies[2], new Vector2(6, -2), Quaternion.identity);
                 break;
+            case 5:
+                Instantiate(enemies[3], new Vector2(6, 0), Quaternion.identity);
+                break;
+            case 6:
+                Instantiate(enemies[3], new Vector2(6, 0), Quaternion.identity);
+                Instantiate(enemies[3], new Vector2(6, 2), Quaternion.identity);
+
+                break;
         } 
     }
 }

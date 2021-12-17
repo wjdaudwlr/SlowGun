@@ -14,7 +14,7 @@ public class MeleeWeapon : Enemy
 
     protected bool isAttack = true;
 
-    private void Awake()
+    public virtual void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
 
