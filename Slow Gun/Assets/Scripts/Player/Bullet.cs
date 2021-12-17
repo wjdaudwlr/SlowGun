@@ -29,12 +29,12 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             Instantiate(bulletEffect, transform.position, Quaternion.identity);
         }
-        else if (collision.gameObject.tag.Equals("Enemy") && GameManager.Instance.IsGameStart == true)
+        else if (collision.gameObject.tag.Equals("Enemy") && GameManager.Instance.IsPlayingGame == true)
         {
             Destroy(collision.gameObject);
 
             GameManager.Instance.stageEnemyNum--;
-            if (GameManager.Instance.stageEnemyNum == 0) GameManager.Instance.GaemOver();
+            if (GameManager.Instance.stageEnemyNum == 0) GameManager.Instance.GameClear();
 
             Instantiate(bulletEffect, transform.position, Quaternion.identity);
         }

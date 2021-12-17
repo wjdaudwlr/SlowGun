@@ -28,7 +28,7 @@ public class EnemyBullet : MonoBehaviour
             Destroy(gameObject);
             Instantiate(bulletEffect, transform.position, Quaternion.identity);
         }
-        else if (collision.gameObject.tag.Equals("Player") && GameManager.Instance.IsGameStart == true)
+        else if (collision.gameObject.tag.Equals("Player"))
         {
             GameManager.Instance.GaemOver();
             Instantiate(bulletEffect, transform.position, Quaternion.identity);

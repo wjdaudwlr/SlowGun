@@ -9,6 +9,8 @@ public class GunController : MonoBehaviour
     [SerializeField]
     private Transform gunPointTransform;    // ÃÑ±¸ À§Ä¡
 
+    public GameObject dieEffect;           // ´ÙÀÌ ÀÌÆåÆ®
+
     [SerializeField]
     private float reboundPower;             // ÃÑ ¹Ýµ¿ ÆÄ¿ö
     [SerializeField]
@@ -25,7 +27,7 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.IsGameStart == false) return;
+        if (GameManager.Instance.IsPlayingGame == false) return;
 
         Vector2 direction = gunPointTransform.position - transform.position;
 

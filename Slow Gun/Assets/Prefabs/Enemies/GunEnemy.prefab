@@ -187,3 +187,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4498156354094476374, guid: f246d564d78c261408325b36524233fd, type: 3}
   gunPointTransform: {fileID: 8623019389773301719}
   reboundPower: 10
+  shotDelay: 0.5

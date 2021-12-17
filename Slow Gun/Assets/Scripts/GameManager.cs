@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private GameObject playerGun;
     [SerializeField]
     private StageController stageController;
-    public bool IsGameStart { set; get; } = false;
+    public bool IsPlayingGame { set; get; } = false;
     public bool IsGameOver { set; get; } = false;
 
     private static GameManager instance = null;
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 GaemStart();
 
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     private void GaemStart()
     {
         stageEnemyNum = stageController.stageEnemynum[currentStage];
-        IsGameStart = true;
+        IsPlayingGame = true;
         mainMenuPanel.SetActive(false);
         playerGun.transform.position = new Vector3(-6, 0, 0);
         playerGun.SetActive(true);
@@ -101,16 +101,23 @@ public class GameManager : MonoBehaviour
 
     public void GaemOver()
     {
+        if (!IsPlayingGame) return;
+
+        Instantiate(playerGun.GetComponent<GunController>().dieEffect, playerGun.transform.position, Quaternion.identity);
+        Time.timeScale = 1;
         gameOverPanel.SetActive(true);
         playerGun.SetActive(false);
         IsGameOver = true;
-        IsGameStart = false;
+        IsPlayingGame = false;
     }
 
     public void GameClear()
     {
+        if (!IsPlayingGame) return;
+
+        Time.timeScale = 1;
         gameClearPanel.SetActive(true);
-        IsGameStart = false;
+        IsPlayingGame = false;
         currentStage++;
         PlayerPrefs.SetInt("BestStage", currentStage);
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeWeapon : MonoBehaviour
+public class MeleeWeapon : Enemy
 {
     [SerializeField]
     protected Transform attackPoint;
@@ -23,7 +23,7 @@ public class MeleeWeapon : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
-        if (GameManager.Instance.IsGameStart == false) return;
+        if (GameManager.Instance.IsPlayingGame == false) Destroy(gameObject);
         attack();
     }
 

@@ -252,5 +252,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce9ad771c54d9a49bd2869b6d97e99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 40
+  moveSpeed: 55
   bulletEffect: {fileID: 4155550193732123639, guid: df5d351d4a76aba49bfa8debe7c758cc, type: 3}
